@@ -78,91 +78,63 @@ const Navbar = () => {
 
           {/* Citizen */}
           {user?.role === "citizen" && (
-            <>
-              <Link
-                to="/dashboard"
-                className="nav-link"
-                onClick={closeMenu}
-              >
-                Dashboard
-              </Link>
+  <>
+    <Link
+      to="/dashboard"
+      className="nav-link"
+      onClick={closeMenu}
+    >
+      Dashboard
+    </Link>
 
-              <Link
-                to="/users"
-                className="nav-link"
-                onClick={closeMenu}
-              >
-                Community
-              </Link>
+    <Link
+      to="/profile"
+      className="nav-link mobile-only"
+      onClick={closeMenu}
+    >
+      Profile
+    </Link>
 
-              <Link
-                to="/profile"
-                className="nav-link mobile-only"
-                onClick={closeMenu}
-              >
-                Profile
-              </Link>
-
-              <button
-                className="mobile-logout mobile-only"
-                onClick={handleLogout}
-              >
-                Logout
-              </button>
-            </>
-          )}
+    <button
+      className="mobile-logout mobile-only"
+      onClick={handleLogout}
+    >
+      Logout
+    </button>
+  </>
+)}
 
           {/* Admin */}
-          {user?.role === "admin" && (
-            <>
-              <Link
-                to="/admin"
-                className="nav-link"
-                onClick={closeMenu}
-              >
-                Dashboard
-              </Link>
+         {user?.role === "admin" && (
+  <>
+    <Link to="/admin" className="nav-link" onClick={closeMenu}>
+      Dashboard
+    </Link>
 
-              <Link
-                to="/admin/tickets"
-                className="nav-link"
-                onClick={closeMenu}
-              >
-                Tickets
-              </Link>
+    <Link to="/admin/tickets" className="nav-link" onClick={closeMenu}>
+      Tickets
+    </Link>
 
-              <Link
-                to="/admin/analytics"
-                className="nav-link"
-                onClick={closeMenu}
-              >
-                Analytics
-              </Link>
+    <Link to="/admin/analytics" className="nav-link" onClick={closeMenu}>
+      Analytics
+    </Link>
 
-              <Link
-                to="/users"
-                className="nav-link"
-                onClick={closeMenu}
-              >
-                Community
-              </Link>
+    <Link to="/users" className="nav-link" onClick={closeMenu}>
+      Community
+    </Link>
 
-              <Link
-                to="/profile"
-                className="nav-link mobile-only"
-                onClick={closeMenu}
-              >
-                Profile
-              </Link>
+    <Link to="/profile" className="nav-link mobile-only" onClick={closeMenu}>
+      Profile
+    </Link>
 
-              <button
-                className="mobile-logout mobile-only"
-                onClick={handleLogout}
-              >
-                Logout
-              </button>
-            </>
-          )}
+    <button
+      className="mobile-logout mobile-only"
+      onClick={handleLogout}
+    >
+      Logout
+    </button>
+  </>
+)}
 
           {/* Guest Mobile */}
           {!user && (

@@ -70,13 +70,13 @@ function App() {
         />
 
         <Route
-          path="/users"
-          element={
-            <ProtectedRoute>
-              <Users />
-            </ProtectedRoute>
-          }
-        />
+  path="/users"
+  element={
+    <AdminRoute>
+      <Users />
+    </AdminRoute>
+  }
+/>
 
         {/* Admin Routes */}
         <Route
