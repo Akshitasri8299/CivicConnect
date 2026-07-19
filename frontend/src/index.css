@@ -259,139 +259,340 @@ input, select, textarea {
   }
 }
 
-/* ---------- 5. Navbar ---------- */
-.navbar {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background: rgba(255,255,255,.92);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid #ece7dd;
+/* ===========================
+   NAVBAR
+=========================== */
+
+.navbar{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(255,255,255,.95);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid #ece7dd;
 }
 
 .navbar-inner{
-  max-width:1200px;
-  margin:auto;
-  height:74px;
+    max-width:1200px;
+    margin:auto;
+    height:74px;
 
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 
-  padding:0 24px;
+    padding:0 24px;
 }
 
+/* Logo */
+
 .navbar-brand{
-  display:flex;
-  align-items:center;
-  gap:10px;
+    display:flex;
+    align-items:center;
+    gap:10px;
 
-  font-size:30px;
-  font-weight:700;
+    text-decoration:none;
 
-  text-decoration:none;
-  color:#2d2d2d;
+    color:#2d2d2d;
 
-  flex:1;
+    font-size:28px;
+    font-weight:700;
 }
 
 .brand-dot{
-  width:12px;
-  height:12px;
-  border-radius:50%;
-  background:#d8a86f;
+    width:12px;
+    height:12px;
+
+    border-radius:50%;
+
+    background:#d8a86f;
 }
 
-.navbar-center{
-  flex:2;
+/* Center Links */
 
-  display:flex;
-  justify-content:center;
-  gap:30px;
+.navbar-center{
+    display:flex;
+    align-items:center;
+    gap:28px;
 }
 
 .nav-link{
-  text-decoration:none;
-  color:#444;
-  font-weight:600;
-  transition:.25s;
+    text-decoration:none;
+    color:#444;
+    font-weight:600;
+    transition:.25s;
 }
 
 .nav-link:hover{
-  color:#84a96c;
+    color:#84a96c;
 }
+
+/* Right */
 
 .navbar-right{
-  flex:1;
-
-  display:flex;
-  justify-content:flex-end;
-  align-items:center;
-  gap:12px;
+    display:flex;
+    align-items:center;
+    gap:12px;
 }
 
+/* Profile */
+
 .profile-menu{
-  position:relative;
+    position:relative;
 }
 
 .profile-btn{
-  background:#84a96c;
-  color:white;
+    background:#84a96c;
+    color:#fff;
 
-  border:none;
+    border:none;
 
-  padding:10px 18px;
+    padding:10px 18px;
 
-  border-radius:10px;
+    border-radius:12px;
 
-  cursor:pointer;
+    cursor:pointer;
 
-  font-weight:600;
+    font-weight:600;
+}
+
+.profile-btn:hover{
+    background:#6d8d59;
 }
 
 .dropdown{
-  position:absolute;
+    position:absolute;
+    right:0;
+    top:55px;
 
-  right:0;
-  top:52px;
+    width:190px;
 
-  width:180px;
+    background:#fff;
 
-  background:white;
+    border-radius:14px;
 
-  border-radius:12px;
+    overflow:hidden;
 
-  overflow:hidden;
-
-  box-shadow:0 10px 30px rgba(0,0,0,.12);
+    box-shadow:0 12px 28px rgba(0,0,0,.12);
 }
 
 .dropdown-item{
-  display:block;
+    display:block;
 
-  width:100%;
+    width:100%;
 
-  padding:14px 18px;
+    padding:14px 18px;
 
-  text-decoration:none;
+    background:#fff;
 
-  color:#333;
+    border:none;
 
-  border:none;
+    text-align:left;
 
-  background:white;
+    text-decoration:none;
 
-  text-align:left;
+    color:#333;
 
-  cursor:pointer;
+    cursor:pointer;
 }
 
 .dropdown-item:hover{
-  background:#f4f4f4;
+    background:#f5f5f5;
 }
 
 .logout-item{
-  color:#d9534f;
+    color:#dc3545;
+}
+
+/* Hamburger */
+
+.menu-toggle{
+    display:none;
+
+    background:none;
+    border:none;
+
+    cursor:pointer;
+}
+
+/* Mobile only */
+
+.mobile-only{
+    display:none;
+}
+
+.mobile-logout{
+    display:none;
+
+    background:none;
+    border:none;
+
+    color:#dc3545;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    cursor:pointer;
+}
+
+/* ===========================
+   TABLET
+=========================== */
+
+@media(max-width:992px){
+
+.navbar-inner{
+
+    padding:0 18px;
+
+}
+
+.navbar-brand{
+
+    font-size:24px;
+
+}
+
+.navbar-center{
+
+    gap:18px;
+
+}
+
+}
+
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media(max-width:768px){
+
+.navbar-inner{
+
+    height:70px;
+
+    position:relative;
+
+}
+
+.menu-toggle{
+
+    display:block;
+
+    color:#333;
+
+}
+
+.navbar-center{
+
+    position:absolute;
+
+    top:70px;
+    left:0;
+
+    width:100%;
+
+    background:#fff;
+
+    display:none;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:20px;
+
+    padding:30px 0;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    border-bottom:1px solid #eee;
+
+}
+
+.navbar-center.active{
+
+    display:flex;
+
+}
+
+.mobile-only{
+
+    display:block;
+
+}
+
+.mobile-logout{
+
+    display:block;
+
+}
+
+.navbar-right{
+
+    display:none;
+
+}
+
+.nav-link{
+
+    font-size:18px;
+
+}
+
+}
+
+
+/* ===========================
+   SMALL PHONE
+=========================== */
+
+@media(max-width:480px){
+
+.navbar-inner{
+
+    padding:0 16px;
+
+}
+
+.navbar-brand{
+
+    font-size:22px;
+
+}
+
+.brand-dot{
+
+    width:10px;
+    height:10px;
+
+}
+
+.nav-link{
+
+    font-size:17px;
+
+}
+
+}
+/* Mobile Only */
+
+.mobile-only{
+    display:none;
+}
+
+@media(max-width:768px){
+
+.mobile-only{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:18px;
+    width:100%;
+}
+
 }
 /* ---------- 6. Toast ---------- */
 .toast-container {

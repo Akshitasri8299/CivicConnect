@@ -1,18 +1,24 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
 import { useState } from "react";
+import { HiMenu, HiX } from "react-icons/hi";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [open, setOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
 
   const isLanding = location.pathname === "/";
 
+  const closeMenu = () => setMenuOpen(false);
+
   const handleLogout = () => {
     logout();
+    setMenuOpen(false);
+    setProfileOpen(false);
     navigate("/login");
   };
 
@@ -21,48 +27,167 @@ const Navbar = () => {
       <div className="navbar-inner">
 
         {/* Logo */}
-
-        <Link to="/" className="navbar-brand">
+        <Link
+          to="/"
+          className="navbar-brand"
+          onClick={closeMenu}
+        >
           <span className="brand-dot"></span>
           CivicConnect
         </Link>
 
-        {/* Center Navigation */}
+        {/* Mobile Menu Button */}
+        <button
+          className="menu-toggle"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          {menuOpen ? <HiX size={30} /> : <HiMenu size={30} />}
+        </button>
 
-        <div className="navbar-center">
+        {/* Navigation */}
+        <div className={`navbar-center ${menuOpen ? "active" : ""}`}>
 
+          {/* Landing */}
           {!user && isLanding && (
             <>
-              <a href="#home" className="nav-link">Home</a>
-              <a href="#about" className="nav-link">About</a>
-              <a href="#how" className="nav-link">How It Works</a>
-              <a href="#impact" className="nav-link">Impact</a>
-              <Link to="/contact" className="nav-link">
-  Contact
-</Link>
+              <a href="#home" className="nav-link" onClick={closeMenu}>
+                Home
+              </a>
+
+              <a href="#about" className="nav-link" onClick={closeMenu}>
+                About
+              </a>
+
+              <a href="#how" className="nav-link" onClick={closeMenu}>
+                How It Works
+              </a>
+
+              <a href="#impact" className="nav-link" onClick={closeMenu}>
+                Impact
+              </a>
+
+              <Link
+                to="/contact"
+                className="nav-link"
+                onClick={closeMenu}
+              >
+                Contact
+              </Link>
             </>
           )}
 
-          {user?.role === "admin" && (
-            <>
-              <Link to="/admin" className="nav-link">Dashboard</Link>
-              <Link to="/admin/tickets" className="nav-link">Tickets</Link>
-              <Link to="/admin/analytics" className="nav-link">Analytics</Link>
-              <Link to="/users" className="nav-link">Community</Link>
-            </>
-          )}
-
+          {/* Citizen */}
           {user?.role === "citizen" && (
             <>
-              <Link to="/dashboard" className="nav-link">Dashboard</Link>
-              <Link to="/users" className="nav-link">Community</Link>
+              <Link
+                to="/dashboard"
+                className="nav-link"
+                onClick={closeMenu}
+              >
+                Dashboard
+              </Link>
+
+              <Link
+                to="/users"
+                className="nav-link"
+                onClick={closeMenu}
+              >
+                Community
+              </Link>
+
+              <Link
+                to="/profile"
+                className="nav-link mobile-only"
+                onClick={closeMenu}
+              >
+                Profile
+              </Link>
+
+              <button
+                className="mobile-logout mobile-only"
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
             </>
+          )}
+
+          {/* Admin */}
+          {user?.role === "admin" && (
+            <>
+              <Link
+                to="/admin"
+                className="nav-link"
+                onClick={closeMenu}
+              >
+                Dashboard
+              </Link>
+
+              <Link
+                to="/admin/tickets"
+                className="nav-link"
+                onClick={closeMenu}
+              >
+                Tickets
+              </Link>
+
+              <Link
+                to="/admin/analytics"
+                className="nav-link"
+                onClick={closeMenu}
+              >
+                Analytics
+              </Link>
+
+              <Link
+                to="/users"
+                className="nav-link"
+                onClick={closeMenu}
+              >
+                Community
+              </Link>
+
+              <Link
+                to="/profile"
+                className="nav-link mobile-only"
+                onClick={closeMenu}
+              >
+                Profile
+              </Link>
+
+              <button
+                className="mobile-logout mobile-only"
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
+            </>
+          )}
+
+          {/* Guest Mobile */}
+          {!user && (
+            <div className="mobile-only">
+              <Link
+                to="/login"
+                className="nav-link"
+                onClick={closeMenu}
+              >
+                Login
+              </Link>
+
+              <Link
+                to="/register"
+                className="nav-link"
+                onClick={closeMenu}
+              >
+                Register
+              </Link>
+            </div>
           )}
 
         </div>
 
-        {/* Right */}
-
+        {/* Desktop Right */}
         <div className="navbar-right">
 
           {!user ? (
@@ -80,18 +205,18 @@ const Navbar = () => {
 
               <button
                 className="profile-btn"
-                onClick={() => setOpen(!open)}
+                onClick={() => setProfileOpen(!profileOpen)}
               >
                 👤 {user.name.split(" ")[0]} ▼
               </button>
 
-              {open && (
+              {profileOpen && (
                 <div className="dropdown">
 
                   <Link
                     to="/profile"
                     className="dropdown-item"
-                    onClick={() => setOpen(false)}
+                    onClick={() => setProfileOpen(false)}
                   >
                     Profile
                   </Link>
