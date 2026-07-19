@@ -1,10 +1,12 @@
+import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import { useState } from "react";
 import { useToast } from "../components/Toast";
 import "./Contact.css";
 
 const Contact = () => {
   const { showToast } = useToast();
-
+const { user } = useAuth();
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -129,8 +131,23 @@ const Contact = () => {
         ></iframe>
 
       </div>
-
+<div className="contact-back">
+  {!user ? (
+    <Link to="/" className="btn btn-outline">
+      ← Back to Home
+    </Link>
+  ) : user.role === "admin" ? (
+    <Link to="/admin" className="btn btn-outline">
+      ← Back to Dashboard
+    </Link>
+  ) : (
+    <Link to="/dashboard" className="btn btn-outline">
+      ← Back to Dashboard
+    </Link>
+  )}
+</div>
     </div>
+    
   );
 };
 

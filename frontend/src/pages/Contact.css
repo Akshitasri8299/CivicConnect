@@ -126,3 +126,12 @@ grid-template-columns:1fr;
 }
 
 }
+.contact-back{
+    margin-bottom:30px;
+}
+
+.contact-back .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+}
