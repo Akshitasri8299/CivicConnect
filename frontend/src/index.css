@@ -1,0 +1,656 @@
+/* ==========================================================================
+   CivicConnect Global Stylesheet
+   Plain CSS only — no framework. Organized by section:
+   1. Design tokens (CSS variables)
+   2. Reset & base styles
+   3. Layout helpers
+   4. Buttons & forms
+   5. Navbar
+   6. Toast
+   7. Ticket-stub complaint cards
+   8. Filter tabs
+   9. Status badges
+   10. Page-level shared styles (auth, landing, dashboard, detail)
+   ========================================================================== */
+
+/* ---------- 1. Design tokens ---------- */
+html {
+  scroll-behavior: smooth;
+}
+:root {
+  /* Pastel palette */
+  --color-bg: #FBF7F0;           /* cream / off-white */
+  --color-surface: #FFFFFF;
+  --color-sage: #A9C5A0;         /* sage green accent */
+  --color-sage-dark: #7FA073;
+  --color-dusty-blue: #9AB4CF;   /* dusty blue accent */
+  --color-dusty-blue-dark: #6C8FAF;
+  --color-peach: #F1C6A0;        /* peach accent */
+  --color-peach-dark: #E3A56D;
+
+  --color-text: #33302C;
+  --color-text-muted: #74716C;
+  --color-border: #E5DFD3;
+
+  --color-success: #7FA073;
+  --color-warning: #D9A441;
+  --color-danger: #C97A6D;
+  --color-info: #6C8FAF;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  --shadow-sm: 0 1px 3px rgba(51, 48, 44, 0.08);
+  --shadow-md: 0 4px 16px rgba(51, 48, 44, 0.10);
+  --shadow-lg: 0 8px 28px rgba(51, 48, 44, 0.14);
+
+  --font-heading: "Fraunces", Georgia, serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --max-width: 1100px;
+}
+
+
+/* Custom Scrollbar */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f5f2eb;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #9DB58D;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7f9d72;
+}
+/* ---------- 2. Reset & base ---------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--color-text);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+input, select, textarea {
+  font-family: var(--font-body);
+}
+
+/* ---------- 3. Layout helpers ---------- */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.page {
+  min-height: calc(100vh - 72px);
+  padding: 40px 0 80px;
+}
+
+.page-header {
+  margin-bottom: 32px;
+}
+
+.page-header h1 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.page-header p {
+  color: var(--color-text-muted);
+}
+
+/* ---------- 4. Buttons & forms ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 22px;
+  border-radius: var(--radius-md);
+  border: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background-color: var(--color-sage);
+  color: #24361F;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-sage-dark);
+  color: #fff;
+}
+
+.btn-secondary {
+  background-color: var(--color-dusty-blue);
+  color: #1E2E3D;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-dusty-blue-dark);
+  color: #fff;
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 1.5px solid var(--color-border);
+  color: var(--color-text);
+}
+
+.btn-outline:hover {
+  border-color: var(--color-sage-dark);
+  background-color: rgba(169, 197, 160, 0.12);
+}
+
+.btn-danger-outline {
+  background-color: transparent;
+  border: 1.5px solid var(--color-danger);
+  color: var(--color-danger);
+}
+
+.btn-danger-outline:hover {
+  background-color: rgba(201, 122, 109, 0.1);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn-sm {
+  padding: 7px 14px;
+  font-size: 0.85rem;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+  color: var(--color-text);
+}
+
+.form-control {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-surface);
+  font-size: 0.95rem;
+  color: var(--color-text);
+  transition: border-color 0.15s ease;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--color-dusty-blue-dark);
+}
+
+.form-control.has-error {
+  border-color: var(--color-danger);
+}
+
+.field-error {
+  color: var(--color-danger);
+  font-size: 0.82rem;
+  margin-top: 5px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 640px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- 5. Navbar ---------- */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #ece7dd;
+}
+
+.navbar-inner{
+  max-width:1200px;
+  margin:auto;
+  height:74px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:0 24px;
+}
+
+.navbar-brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  font-size:30px;
+  font-weight:700;
+
+  text-decoration:none;
+  color:#2d2d2d;
+
+  flex:1;
+}
+
+.brand-dot{
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  background:#d8a86f;
+}
+
+.navbar-center{
+  flex:2;
+
+  display:flex;
+  justify-content:center;
+  gap:30px;
+}
+
+.nav-link{
+  text-decoration:none;
+  color:#444;
+  font-weight:600;
+  transition:.25s;
+}
+
+.nav-link:hover{
+  color:#84a96c;
+}
+
+.navbar-right{
+  flex:1;
+
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  gap:12px;
+}
+
+.profile-menu{
+  position:relative;
+}
+
+.profile-btn{
+  background:#84a96c;
+  color:white;
+
+  border:none;
+
+  padding:10px 18px;
+
+  border-radius:10px;
+
+  cursor:pointer;
+
+  font-weight:600;
+}
+
+.dropdown{
+  position:absolute;
+
+  right:0;
+  top:52px;
+
+  width:180px;
+
+  background:white;
+
+  border-radius:12px;
+
+  overflow:hidden;
+
+  box-shadow:0 10px 30px rgba(0,0,0,.12);
+}
+
+.dropdown-item{
+  display:block;
+
+  width:100%;
+
+  padding:14px 18px;
+
+  text-decoration:none;
+
+  color:#333;
+
+  border:none;
+
+  background:white;
+
+  text-align:left;
+
+  cursor:pointer;
+}
+
+.dropdown-item:hover{
+  background:#f4f4f4;
+}
+
+.logout-item{
+  color:#d9534f;
+}
+/* ---------- 6. Toast ---------- */
+.toast-container {
+  position: fixed;
+  top: 90px;
+  right: 24px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toast {
+  min-width: 260px;
+  max-width: 360px;
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-lg);
+  border-left: 4px solid var(--color-sage);
+  font-size: 0.9rem;
+  animation: toast-in 0.25s ease;
+}
+
+.toast.toast-error {
+  border-left-color: var(--color-danger);
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* ---------- 7. Ticket-stub complaint cards ---------- */
+.ticket-card {
+  display: flex;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  margin-bottom: 20px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
+}
+
+.ticket-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.ticket-main {
+  flex: 1;
+  padding: 22px 24px;
+  min-width: 0; /* allow text truncation inside flex child */
+}
+
+.ticket-main-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.ticket-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.ticket-description {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  margin: 8px 0 14px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ticket-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+}
+
+.ticket-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background-color: var(--color-bg);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+/* Dashed perforated divider mimicking a physical ticket stub */
+.ticket-divider {
+  width: 0;
+  border-left: 2px dashed var(--color-border);
+  position: relative;
+  margin: 14px 0;
+}
+
+.ticket-divider::before,
+.ticket-divider::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  background-color: var(--color-bg);
+  border-radius: 50%;
+}
+
+.ticket-divider::before { top: -14px; }
+.ticket-divider::after { bottom: -14px; }
+
+.ticket-stub {
+  width: 130px;
+  flex-shrink: 0;
+  background-color: var(--color-sage);
+  background: linear-gradient(160deg, var(--color-sage), var(--color-dusty-blue));
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 10px;
+  text-align: center;
+  gap: 6px;
+}
+
+.ticket-stub-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.85;
+}
+
+.ticket-stub-id {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+@media (max-width: 560px) {
+  .ticket-card {
+    flex-direction: column-reverse;
+  }
+  .ticket-stub {
+    width: 100%;
+    flex-direction: row;
+    padding: 10px 16px;
+    justify-content: space-between;
+  }
+  .ticket-divider {
+    display: none;
+  }
+}
+
+/* ---------- 8. Filter tabs ---------- */
+.filter-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.filter-tab {
+  padding: 9px 18px;
+  border-radius: 999px;
+  border: 1.5px solid var(--color-border);
+  background-color: var(--color-surface);
+  font-size: 0.87rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  transition: all 0.15s ease;
+}
+
+.filter-tab:hover {
+  border-color: var(--color-sage-dark);
+}
+
+.filter-tab.active {
+  background-color: var(--color-text);
+  border-color: var(--color-text);
+  color: #fff;
+}
+
+/* ---------- 9. Status badges ---------- */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.status-pending { background-color: rgba(217, 164, 65, 0.18); color: #8A6212; }
+.status-in-progress { background-color: rgba(108, 143, 175, 0.18); color: #3E5D77; }
+.status-resolved { background-color: rgba(127, 160, 115, 0.2); color: #3E5432; }
+.status-rejected { background-color: rgba(201, 122, 109, 0.18); color: #8A3E31; }
+
+.priority-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+.priority-Low { background-color: rgba(154, 180, 207, 0.2); color: #3E5D77; }
+.priority-Medium { background-color: rgba(217, 164, 65, 0.2); color: #8A6212; }
+.priority-High { background-color: rgba(201, 122, 109, 0.2); color: #8A3E31; }
+
+/* ---------- 10. Shared page styles ---------- */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--color-text-muted);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1.5px dashed var(--color-border);
+}
+
+.empty-state h3 {
+  margin-bottom: 8px;
+  color: var(--color-text);
+}
+
+.spinner {
+  width: 34px;
+  height: 34px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-sage-dark);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin: 60px auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.card-surface {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 32px;
+}
+
+@media (max-width: 640px) {
+  .card-surface { padding: 22px; }
+}

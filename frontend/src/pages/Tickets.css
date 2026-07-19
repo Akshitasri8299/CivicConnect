@@ -1,0 +1,108 @@
+.page-header{
+    margin-bottom:30px;
+}
+
+.tickets-table{
+    background:#fff;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.tickets-table table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.tickets-table thead{
+    background:#98b77c;
+    color:white;
+}
+
+.tickets-table th{
+    padding:18px;
+    text-align:left;
+    font-size:15px;
+    font-weight:600;
+}
+
+.tickets-table td{
+    padding:18px;
+    border-bottom:1px solid #eee;
+    font-size:14px;
+}
+
+.tickets-table tbody tr{
+    transition:.25s;
+}
+
+.tickets-table tbody tr:hover{
+    background:#f8faf6;
+}
+
+.table-btn{
+    padding:8px 14px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:600;
+    display:inline-block;
+}
+
+.view-btn{
+    background:#98b77c;
+    color:white;
+}
+
+.view-btn:hover{
+    background:#7f9d65;
+}
+
+.status-badge{
+    padding:6px 12px;
+    border-radius:50px;
+    color:white;
+    font-size:13px;
+    text-transform:capitalize;
+}
+
+.status-pending{
+    background:#f39c12;
+}
+
+.status-in-progress{
+    background:#3498db;
+}
+
+.status-resolved{
+    background:#2ecc71;
+}
+
+.status-rejected{
+    background:#e74c3c;
+}
+
+@media(max-width:900px){
+
+.tickets-table{
+    overflow-x:auto;
+}
+
+table{
+    min-width:900px;
+}
+
+}.action-buttons{
+    display:flex;
+    gap:10px;
+}
+
+.delete-btn{
+    border:none;
+    background:#e74c3c;
+    color:white;
+    cursor:pointer;
+}
+
+.delete-btn:hover{
+    background:#c0392b;
+}
