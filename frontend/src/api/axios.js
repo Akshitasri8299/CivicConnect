@@ -1,9 +1,8 @@
 import axios from "axios";
 
-// Central axios instance. Base URL points at the Express API.
-// If you deploy the backend elsewhere, change this one line.
+// Central axios instance. Base URL points at the deployed Express API.
 const api = axios.create({
-  baseURL: "http://localhost:5000/api"
+  baseURL: "https://civicconnect-backend-ogtt.onrender.com/api",
 });
 
 // Attach the JWT (if present) to every outgoing request automatically.
