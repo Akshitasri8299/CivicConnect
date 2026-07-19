@@ -86,7 +86,13 @@ const Navbar = () => {
     >
       Dashboard
     </Link>
-
+<Link
+  to="/analytics"
+  className="nav-link"
+  onClick={closeMenu}
+>
+  Analytics
+</Link>
     <Link
       to="/profile"
       className="nav-link mobile-only"
@@ -114,11 +120,13 @@ const Navbar = () => {
     <Link to="/admin/tickets" className="nav-link" onClick={closeMenu}>
       Tickets
     </Link>
-
-    <Link to="/admin/analytics" className="nav-link" onClick={closeMenu}>
-      Analytics
-    </Link>
-
+<Link
+  to="/analytics"
+  className="nav-link"
+  onClick={closeMenu}
+>
+  Analytics
+</Link>
     <Link to="/users" className="nav-link" onClick={closeMenu}>
       Community
     </Link>

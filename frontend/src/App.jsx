@@ -98,13 +98,13 @@ function App() {
         />
 
         <Route
-          path="/admin/analytics"
-          element={
-            <AdminRoute>
-              <AdminAnalytics />
-            </AdminRoute>
-          }
-        />
+  path="/analytics"
+  element={
+    <ProtectedRoute>
+      <AdminAnalytics />
+    </ProtectedRoute>
+  }
+/>
 
         {/* Fallback */}
         <Route path="*" element={<Landing />} />
